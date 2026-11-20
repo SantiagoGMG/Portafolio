@@ -1,0 +1,176 @@
+{
+  "profile": {
+    "name": "Santiago Gael May Góngora",
+    "handle": "SantiagoGMG",
+    "role": "Data Engineer",
+    "bio": "Software Technologies Engineering student at the Autonomous University of Campeche. I'm passionate about data: when you analyze it, raw numbers turn into knowledge, patterns, and predictions.",
+    "location": "Campeche, México",
+    "photo": "assets/yo_arbol.png",
+    "contactText": "Interested in working together? Send me a message!",
+    "contactUrl": "https://mail.google.com/mail/u/1/#inbox?compose=CllgCJTJnMTRCbxfZpZZXjbZRPqRVdqxxrSdlcgxTHVxCHtKxWpCzQrbvcnpXbzHcVhgRbgFzML",
+    "socials": [
+      { "label": "GitHub", "icon": "pi pi-github", "url": "https://github.com/SantiagoGMG" },
+      { "label": "LinkedIn", "icon": "pi pi-linkedin", "url": "https://www.linkedin.com/in/santiago-gael-may-g%C3%B3ngora-55b5363bb/" }
+    ]
+  },
+
+  "experience": [
+    {
+      "org": "UACAM – Faculty of Dentistry",
+      "url": "https://www.uacam.mx/",
+      "role": "Full Stack Developer",
+      "period": "2025 – Present",
+      "description": "Building Odontolabs, a web service for virtual clinical records (C# ASP.NET 8 + Vue)."
+    }
+  ],
+
+  "background": [
+    "Participated in Hackathon Talent Land 2024, 2025, 2026",
+    "Winner of my university's hackathon 2024",
+    "Participated in the NASA Space Apps Challenge Calkiní 2025",
+    "Participated in the NASA Space Apps Challenge 2026",
+    "Working on the Odontolabs medical web service"
+  ],
+
+  "skills": [
+    { "category": "Languages", "items": ["Python", "SQL", "Java", "JavaScript", "TypeScript", "C#", "PHP", "HTML", "CSS"] },
+    { "category": "Data Engineering", "items": ["pandas", "NumPy", "DuckDB", "Parquet", "SSIS", "Shapely", "ETL", "Dimensional Modeling"] },
+    { "category": "Databases & BI", "items": ["SQL Server", "MySQL", "DynamoDB", "Power BI"] },
+    { "category": "Machine Learning", "items": ["scikit-learn", "TensorFlow", "Keras", "PyTorch"] },
+    { "category": "Backend & Frontend", "items": ["FastAPI", "Flask", "ASP.NET Core", "Spring", "Laravel", "Vue.js", "REST APIs"] },
+    { "category": "Cloud & Tools", "items": ["AWS", "Azure", "Docker", "Git", "Linux", "Jira"] }
+  ],
+
+  "projects": [
+    {
+      "title": "Odontolabs",
+      "description": "Odontolabs is a web service for creating virtual clinical records for the Dentistry School of the UAC. Built with C# ASP.NET 8 on the backend and Vue on the frontend.",
+      "image": "assets/odonto/home.png",
+      "gallery": [
+        "assets/odonto/home.png",
+        "assets/odonto/medical-record.webp",
+        "assets/odonto/clinical-forms.webp",
+        "assets/odonto/odontograms.webp",
+        "assets/odonto/laboratory.webp",
+        "assets/odonto/teacher-validation.webp",
+        "assets/odonto/reports.webp"
+      ],
+      "tags": ["C#", "ASP.NET 8", "Vue"],
+      "links": []
+    },
+    {
+      "title": "FireWatch",
+      "description": "A web app that harmonizes 25 years of NASA satellite fire data (MODIS and VIIRS, 8M+ detections) into a consistent fire-activity record for Mexico, letting users select any area to explore its historical fire calendar, trends, recurrent wildfire zones and year-to-year comparisons, with PDF and CSV export. Built with a Python data pipeline, a FastAPI + DuckDB API and a Vue 3 frontend for the NASA Space Apps Challenge 2026.",
+      "image": "assets/FireWatch.png",
+      "tags": ["Python", "FastAPI", "DuckDB", "Vue 3"],
+      "links": [
+        { "label": "Demo", "type": "demo", "url": "https://www.firewatch.study/" },
+        { "label": "Video", "type": "video", "url": "https://youtu.be/B9-m8W7f44k?si=r-MRSNzuXvC5cslI" }
+      ]
+    },
+    {
+      "title": "ML Tree",
+      "description": "A machine learning model to classify an image of a tree within 11 species of the Yucatan Peninsula.",
+      "image": "assets/ml-tree.png",
+      "tags": ["Machine Learning", "Computer Vision"],
+      "links": [
+        { "label": "Demo", "type": "demo", "url": "https://identificador-arboles-peninsula-fro.vercel.app/" }
+      ]
+    },
+    {
+      "title": "Banxico ETL Pipeline",
+      "description": "A daily ETL pipeline that pulls USD/MXN exchange-rate data from the Banco de México (Banxico) API, processes it, and publishes an updated chart of the dollar value every day. Deployed on AWS with CloudFront.",
+      "image": "assets/pipeline.png",
+      "tags": ["Python", "ETL", "AWS", "CloudFront"],
+      "links": [
+        { "label": "Code", "type": "code", "url": "https://github.com/SantiagoGMG/banxico-etl-pipeline.git" },
+        { "label": "Demo", "type": "demo", "url": "https://dq3n21vi6t3t6.cloudfront.net/" }
+      ]
+    },
+    {
+      "title": "Pegasi Detecter",
+      "description": "Exoplanet detector powered by a Gradient Boosted Tree machine learning model, built with Python, Flask, and Vue for the frontend.",
+      "image": "assets/PegasiDetecter.png",
+      "tags": ["Python", "Flask", "Vue", "ML"],
+      "links": [
+        { "label": "Code", "type": "code", "url": "https://github.com/AleksPrz/AWorldAwayBackend.git" },
+        { "label": "Demo", "type": "demo", "url": "https://pegasi-detecter.netlify.app/" },
+        { "label": "Video", "type": "video", "url": "https://www.youtube.com/watch?v=LRM87Law-AM" }
+      ]
+    },
+    {
+      "title": "Stationery POS",
+      "description": "A point-of-sale system for a stationery store (fictional client): product and inventory management, sales registration, and checkout. React frontend with a separate backend API.",
+      "image": "assets/LapizVeloz.png",
+      "tags": ["React", "REST API"],
+      "note": "Demo password: lapiz",
+      "links": [
+        { "label": "Backend", "type": "code", "url": "https://github.com/SantiagoGMG/Papeleria-backend.git" },
+        { "label": "Frontend", "type": "code", "url": "https://github.com/SantiagoGMG/Papeleria-frontend.git" },
+        { "label": "Demo", "type": "demo", "url": "https://papeleria-frontend-alpha.vercel.app/" }
+      ]
+    },
+    {
+      "title": "Class Booker",
+      "description": "A room reservation web service for the UAC, where teachers can book rooms in advance through an interactive calendar. Built with Spring on the backend and Vue on the frontend.",
+      "image": "assets/ClassBooker.png",
+      "tags": ["Java", "Spring", "Vue"],
+      "links": [
+        { "label": "Backend", "type": "code", "url": "https://github.com/SebastianMayG/Backend-Reservaciones-Spring.git" },
+        { "label": "Frontend", "type": "code", "url": "https://github.com/SebastianMayG/Frontend-Reservaciones.git" }
+      ]
+    },
+    {
+      "title": "Plan Campeche",
+      "description": "Concept for a website that gathers all the cultural, social, and technology events of my city, Campeche.",
+      "image": "assets/PlanCampeche.png",
+      "tags": ["Web"],
+      "links": [
+        { "label": "Code", "type": "code", "url": "https://github.com/SebastianMayG/Cartelera.git" }
+      ]
+    },
+    {
+      "title": "The Lost Knight",
+      "description": "Videogame built in Java with Greenfoot. Made with the intention of applying OOP concepts, the game features a variety of weapons, enemies and auto-generated levels.",
+      "image": "assets/TheLostKnight.png",
+      "tags": ["Java", "Greenfoot", "OOP"],
+      "links": [
+        { "label": "Code", "type": "code", "url": "https://github.com/SantiagoGMG/The-Lost-Knigth.git" },
+        { "label": "Video", "type": "video", "url": "https://www.youtube.com/watch?v=gBKHO86DSkM" }
+      ]
+    }
+  ],
+
+  "certifications": [
+    {
+      "name": "AWS Certified Cloud Practitioner",
+      "issuer": "Amazon Web Services",
+      "code": "CLF-C02",
+      "icon": "pi pi-cloud",
+      "url": "https://www.credly.com/badges/5054af95-9425-4d49-b369-b2200e092bb9/public_url",
+      "verifyLabel": "Verify on Credly"
+    },
+    {
+      "name": "AWS Certified AI Practitioner",
+      "issuer": "Amazon Web Services",
+      "code": "AIF-C01",
+      "icon": "pi pi-sparkles",
+      "url": "https://www.credly.com/badges/b6d8df8a-7c5a-426d-8cad-dcb930224639/public_url",
+      "verifyLabel": "Verify on Credly"
+    },
+    {
+      "name": "AWS Cloud Technical Essentials",
+      "issuer": "Coursera",
+      "icon": "pi pi-server",
+      "url": "https://coursera.org/share/bf2860f62413782f7bfc0bea2f39576c",
+      "verifyLabel": "View certificate"
+    },
+    {
+      "name": "Python for Data Science & AI: Hands-On Development",
+      "issuer": "Coursera",
+      "icon": "pi pi-code",
+      "url": "https://coursera.org/share/29963e754fa588b12b789a690ab749bc",
+      "verifyLabel": "View certificate"
+    }
+  ]
+}
