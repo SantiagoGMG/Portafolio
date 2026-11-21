@@ -94,7 +94,14 @@ if ! aws iam get-open-id-connect-provider --open-id-connect-provider-arn "$OIDC_
     --client-id-list sts.amazonaws.com --thumbprint-list 6938fd4d98bab03faadb97b34396831e3780aea1
 fi
 
-# 6. Deploy role: only pushes to $BRANCH of this repo can assume it
+# 6. Deploy role: only pushes to $BRANCH of this repo can assume it.
+# GitHub's OIDC "sub" may be the classic "repo:owner/name:..." or the newer form with numeric IDs
+# ("repo:owner@<ownerId>/name@<repoId>:..."), so both are allowed.
+REPO_JSON="$(curl -fsS "https://api.github.com/repos/${GITHUB_REPO}")"
+REPO_ID="$(printf '%s' "$REPO_JSON" | grep -m1 -oE '"id": *[0-9]+' | grep -oE '[0-9]+')"
+OWNER_ID="$(printf '%s' "$REPO_JSON" | grep -A3 '"owner"' | grep -m1 -oE '"id": *[0-9]+' | grep -oE '[0-9]+')"
+SUB_CLASSIC="repo:${GITHUB_REPO}:ref:refs/heads/${BRANCH}"
+SUB_IDS="repo:${GITHUB_REPO%%/*}@${OWNER_ID}/${GITHUB_REPO#*/}@${REPO_ID}:ref:refs/heads/${BRANCH}"
 cat > "$TMP/trust.json" <<EOF
 {
   "Version": "2012-10-17",
@@ -105,7 +112,7 @@ cat > "$TMP/trust.json" <<EOF
     "Condition": {
       "StringEquals": {
         "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-        "token.actions.githubusercontent.com:sub": "repo:${GITHUB_REPO}:ref:refs/heads/${BRANCH}"
+        "token.actions.githubusercontent.com:sub": ["${SUB_CLASSIC}", "${SUB_IDS}"]
       }
     }
   }]
