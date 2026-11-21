@@ -2,7 +2,7 @@ name: Deploy to S3 + CloudFront
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
 
 # OIDC: GitHub gets short-lived AWS credentials, no access keys stored anywhere

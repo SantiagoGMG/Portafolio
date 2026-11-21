@@ -3,18 +3,25 @@
 # Everything here stays inside the AWS free tier / always-free limits.
 #
 # Usage (Git Bash, with valid `aws configure` credentials of an admin user):
-#   GITHUB_REPO="SantiagoGMG/portfolio" BUCKET="santiagogmg-portfolio" ALERT_EMAIL="you@example.com" bash infra/setup-aws.sh
+#   GITHUB_REPO="SantiagoGMG/Portafolio" BUCKET="santiagogmg-portfolio" ALERT_EMAIL="you@example.com" bash infra/setup-aws.sh
 set -euo pipefail
 
 : "${GITHUB_REPO:?Set GITHUB_REPO=owner/repo}"
 : "${BUCKET:?Set BUCKET=globally-unique-bucket-name}"
 : "${ALERT_EMAIL:?Set ALERT_EMAIL for the budget alert}"
 REGION="${REGION:-us-east-1}"
+BRANCH="${BRANCH:-master}"
 ROLE_NAME="github-portfolio-deploy"
-TMP="$(mktemp -d)"
 export AWS_PAGER=""
 
-ACCOUNT_ID="$(aws sts get-caller-identity --query Account --output text)"
+# Temp dir as a Windows-style path when running in Git Bash, so aws.exe can read file:// arguments
+TMP="$(mktemp -d)"
+if command -v cygpath >/dev/null 2>&1; then TMP="$(cygpath -m "$TMP")"; fi
+
+# aws.exe on Windows ends lines with \r; strip it from captured values
+awst() { aws "$@" --output text | tr -d '\r'; }
+
+ACCOUNT_ID="$(awst sts get-caller-identity --query Account)"
 echo "Account: $ACCOUNT_ID  Region: $REGION  Bucket: $BUCKET  Repo: $GITHUB_REPO"
 
 # 1. Private bucket (Block Public Access is on by default)
@@ -30,9 +37,9 @@ aws s3api put-public-access-block --bucket "$BUCKET" --public-access-block-confi
   BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
 
 # 2. Origin Access Control (CloudFront signs requests to the private bucket)
-OAC_ID="$(aws cloudfront create-origin-access-control --origin-access-control-config \
+OAC_ID="$(awst cloudfront create-origin-access-control --origin-access-control-config \
   "Name=${BUCKET}-oac,SigningProtocol=sigv4,SigningBehavior=always,OriginAccessControlOriginType=s3" \
-  --query OriginAccessControl.Id --output text)"
+  --query OriginAccessControl.Id)"
 
 # 3. CloudFront distribution (HTTPS, caching optimized, cheapest price class)
 cat > "$TMP/dist.json" <<EOF
@@ -61,8 +68,8 @@ cat > "$TMP/dist.json" <<EOF
   }]}
 }
 EOF
-read -r DIST_ID DIST_DOMAIN < <(aws cloudfront create-distribution --distribution-config "file://$TMP/dist.json" \
-  --query 'Distribution.[Id,DomainName]' --output text)
+read -r DIST_ID DIST_DOMAIN < <(awst cloudfront create-distribution --distribution-config "file://$TMP/dist.json" \
+  --query 'Distribution.[Id,DomainName]')
 
 # 4. Bucket policy: only this distribution can read
 cat > "$TMP/bucket-policy.json" <<EOF
@@ -87,7 +94,7 @@ if ! aws iam get-open-id-connect-provider --open-id-connect-provider-arn "$OIDC_
     --client-id-list sts.amazonaws.com --thumbprint-list 6938fd4d98bab03faadb97b34396831e3780aea1
 fi
 
-# 6. Deploy role: only pushes to main of this repo can assume it
+# 6. Deploy role: only pushes to $BRANCH of this repo can assume it
 cat > "$TMP/trust.json" <<EOF
 {
   "Version": "2012-10-17",
@@ -98,7 +105,7 @@ cat > "$TMP/trust.json" <<EOF
     "Condition": {
       "StringEquals": {
         "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-        "token.actions.githubusercontent.com:sub": "repo:${GITHUB_REPO}:ref:refs/heads/main"
+        "token.actions.githubusercontent.com:sub": "repo:${GITHUB_REPO}:ref:refs/heads/${BRANCH}"
       }
     }
   }]
