@@ -77,6 +77,24 @@
         { "label": "Demo", "type": "demo", "url": "https://identificador-arboles-peninsula-fro.vercel.app/" }
       ]
     },
+        {
+      "title": "PC Shop ETL & BI Dashboard",
+      "description": "A Python ETL pipeline with a star schema (fact and dimension tables) loaded through SSIS into a SQL Server Data Warehouse, including date and currency normalization, automated product-vs-service classification and referential integrity validation. The Power BI dashboard consolidates 1,247 tickets, 306 products and 1.5M in revenue (2022-2026), showing a 64/36 product-service split and sales peaks in January and August.",
+      "image": "assets/pcshop_dashboard.png",
+      "tags": ["Python", "ETL", "SSIS", "SQL Server", "Power BI"],
+      "links": [
+        { "label": "Dashboard", "type": "demo", "url": "https://app.powerbi.com/groups/me/reports/0ea361b8-2853-4d42-a692-7c93333cf3d9/8d81f9bd4a8547e21201?experience=power-bi" }
+      ]
+    },
+    {
+      "title": "Imprenta Campechana Dimensional Model",
+      "description": "A Python ETL pipeline that extracts transactional data from Apache Derby (JDBC/JPype) into a star schema, plus automated PDF technical documentation. The Power BI dashboard covers 120 orders and 1.9M in sales, with KPIs for average ticket (15,814), sales vs. collected, top clients and supply costs. It revealed that only 39% of orders were delivered on time, a problem that was not tracked before.",
+      "image": "assets/imprenta_dashboard.png",
+      "tags": ["Python", "ETL", "Apache Derby", "Power BI", "Dimensional Modeling"],
+      "links": [
+        { "label": "Dashboard", "type": "demo", "url": "https://app.powerbi.com/groups/me/reports/231e24cb-ecca-41d9-8ca1-9478e8fa8f42/427b9157870b156b0ace?experience=power-bi" }
+      ]
+    },
     {
       "title": "Banxico ETL Pipeline",
       "description": "A daily ETL pipeline that pulls USD/MXN exchange-rate data from the Banco de México (Banxico) API, processes it, and publishes an updated chart of the dollar value every day. Deployed on AWS with CloudFront.",
